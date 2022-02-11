@@ -1,13 +1,8 @@
 package com.luciano.apppedidos;
 
-import com.luciano.apppedidos.entities.Categoria;
-import com.luciano.apppedidos.entities.Cidade;
-import com.luciano.apppedidos.entities.Estado;
-import com.luciano.apppedidos.entities.Produto;
-import com.luciano.apppedidos.repositories.CategoriaRepository;
-import com.luciano.apppedidos.repositories.CidadeRepository;
-import com.luciano.apppedidos.repositories.EstadoRepository;
-import com.luciano.apppedidos.repositories.ProdutoRepository;
+import com.luciano.apppedidos.entities.*;
+import com.luciano.apppedidos.entities.enums.TipoCliente;
+import com.luciano.apppedidos.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +21,10 @@ public class AppPedidosApplication implements CommandLineRunner {
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppPedidosApplication.class, args);
@@ -65,6 +64,17 @@ public class AppPedidosApplication implements CommandLineRunner {
 
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+		Cliente cl1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		cl1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cl1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cl1, c2);
+
+		cl1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+		clienteRepository.saveAll(Arrays.asList(cl1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
 	}
 }
