@@ -1,7 +1,7 @@
 package com.luciano.apppedidos.services;
 
 import com.luciano.apppedidos.entities.Cliente;
-import repositories.ClienteRepository;
+import com.luciano.apppedidos.repositories.ClienteRepository;
 import com.luciano.apppedidos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

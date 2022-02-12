@@ -3,11 +3,11 @@ package com.luciano.apppedidos;
 import com.luciano.apppedidos.entities.*;
 import com.luciano.apppedidos.entities.enums.EstadoPagamento;
 import com.luciano.apppedidos.entities.enums.TipoCliente;
+import com.luciano.apppedidos.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import repositories.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

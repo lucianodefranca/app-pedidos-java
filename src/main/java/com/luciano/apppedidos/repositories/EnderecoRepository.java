@@ -1,4 +1,4 @@
-package repositories;
+package com.luciano.apppedidos.repositories;
 
 import com.luciano.apppedidos.entities.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;

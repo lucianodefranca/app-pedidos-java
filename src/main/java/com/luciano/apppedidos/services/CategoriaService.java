@@ -4,7 +4,7 @@ import com.luciano.apppedidos.entities.Categoria;
 import com.luciano.apppedidos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.CategoriaRepository;
+import com.luciano.apppedidos.repositories.CategoriaRepository;
 
 import java.util.Optional;
 
