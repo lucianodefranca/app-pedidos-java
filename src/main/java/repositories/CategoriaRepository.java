@@ -1,4 +1,4 @@
-package com.luciano.apppedidos.repositories;
+package repositories;
 
 import com.luciano.apppedidos.entities.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
