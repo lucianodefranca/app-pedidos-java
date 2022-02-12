@@ -1,5 +1,6 @@
 package com.luciano.apppedidos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luciano.apppedidos.entities.enums.TipoCliente;
 
 import javax.persistence.*;
