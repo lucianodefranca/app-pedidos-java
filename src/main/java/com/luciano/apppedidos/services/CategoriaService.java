@@ -1,8 +1,10 @@
 package com.luciano.apppedidos.services;
 
 import com.luciano.apppedidos.entities.Categoria;
+import com.luciano.apppedidos.services.exceptions.DataIntegrityException;
 import com.luciano.apppedidos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.luciano.apppedidos.repositories.CategoriaRepository;
 
@@ -28,5 +30,17 @@ public class CategoriaService {
     public Categoria update(Categoria obj) {
         findById(obj.getId());
         return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        findById(id);
+        try {
+            repository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException(
+                    "Categoria possui produtos associados, não pode ser excluida!");
+        }
+
     }
 }
