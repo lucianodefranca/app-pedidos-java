@@ -1,5 +1,6 @@
 package com.luciano.apppedidos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luciano.apppedidos.entities.enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
