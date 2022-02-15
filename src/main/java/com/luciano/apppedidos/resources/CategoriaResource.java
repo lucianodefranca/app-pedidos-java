@@ -1,6 +1,7 @@
 package com.luciano.apppedidos.resources;
 
 import com.luciano.apppedidos.entities.Categoria;
+import com.luciano.apppedidos.entities.dtos.CategoriaDTO;
 import com.luciano.apppedidos.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -20,6 +23,13 @@ public class CategoriaResource {
     public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
         Categoria obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<CategoriaDTO> listDTO = service.findAll().stream().map(
+                obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
     @PostMapping

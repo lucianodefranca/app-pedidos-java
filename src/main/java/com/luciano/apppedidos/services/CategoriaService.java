@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.luciano.apppedidos.repositories.CategoriaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ public class CategoriaService {
         Optional<Categoria> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + " Tipo: " + Categoria.class.getName()));
+    }
+
+    public List<Categoria> findAll() {
+        List<Categoria> list = repository.findAll();
+        return list;
     }
 
     public Categoria insert(Categoria obj) {
@@ -43,4 +49,6 @@ public class CategoriaService {
         }
 
     }
+
+
 }
