@@ -1,6 +1,7 @@
 package com.luciano.apppedidos.services;
 
 import com.luciano.apppedidos.entities.Categoria;
+import com.luciano.apppedidos.entities.dtos.CategoriaDTO;
 import com.luciano.apppedidos.services.exceptions.DataIntegrityException;
 import com.luciano.apppedidos.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,9 @@ public class CategoriaService {
         }
     }
 
+    public Categoria fromDTO(CategoriaDTO objDTO) {
+        return new Categoria(objDTO.getId(), objDTO.getNome());
+    }
 
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
