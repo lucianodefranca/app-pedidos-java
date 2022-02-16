@@ -3,11 +3,14 @@ package com.luciano.apppedidos.resources;
 import com.luciano.apppedidos.entities.Categoria;
 import com.luciano.apppedidos.entities.dtos.CategoriaDTO;
 import com.luciano.apppedidos.services.CategoriaService;
+import org.hibernate.persister.entity.SingleTableEntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +54,18 @@ public class CategoriaResource {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<CategoriaDTO>> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPAge", defaultValue = "3") Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction
+            ) {
+        Page<CategoriaDTO> listDTO = service.findPage(page, linesPerPage, orderBy, direction)
+                .map(obj -> new CategoriaDTO(obj));
+        return ResponseEntity.ok().body(listDTO);
     }
 
 }
