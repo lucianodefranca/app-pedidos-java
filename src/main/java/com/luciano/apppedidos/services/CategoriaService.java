@@ -38,8 +38,9 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria obj) {
-        findById(obj.getId());
-        return repository.save(obj);
+        Categoria newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return repository.save(newObj);
     }
 
     public void delete(Integer id) {
@@ -56,6 +57,11 @@ public class CategoriaService {
     public Categoria fromDTO(CategoriaDTO objDTO) {
         return new Categoria(objDTO.getId(), objDTO.getNome());
     }
+
+    private void updateData(Categoria newObj, Categoria obj) {
+        newObj.setNome(obj.getNome());
+    }
+
 
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
