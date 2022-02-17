@@ -1,15 +1,19 @@
 package com.luciano.apppedidos.resources;
 
+import com.luciano.apppedidos.entities.Categoria;
 import com.luciano.apppedidos.entities.Cliente;
 import com.luciano.apppedidos.entities.dtos.CategoriaDTO;
 import com.luciano.apppedidos.entities.dtos.ClienteDTO;
+import com.luciano.apppedidos.entities.dtos.ClienteNewDTO;
 import com.luciano.apppedidos.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -32,6 +36,15 @@ public class ClienteResource {
         List<ClienteDTO> listDTO = service.findAll().stream()
                 .map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO) {
+        Cliente obj = service.fromDTO(objDTO);
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
+                path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")
