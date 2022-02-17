@@ -58,7 +58,7 @@ public class ClienteService {
         }
         catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException(
-                    "Cliente não pode ser excluido!");
+                    "Cliente não pode ser excluido, pois há pedidos relacionados!");
         }
     }
 
