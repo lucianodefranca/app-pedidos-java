@@ -1,12 +1,14 @@
 package com.luciano.apppedidos.entities.dtos;
 
 import com.luciano.apppedidos.entities.Cliente;
+import com.luciano.apppedidos.services.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
