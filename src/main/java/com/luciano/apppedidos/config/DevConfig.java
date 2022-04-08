@@ -1,6 +1,8 @@
 package com.luciano.apppedidos.config;
 
 import com.luciano.apppedidos.services.DBService;
+import com.luciano.apppedidos.services.EmailService;
+import com.luciano.apppedidos.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,10 +24,15 @@ public class DevConfig {
     @Bean
     public boolean intanciaBaseDeDados() throws ParseException {
 
-        if ("create".equals(strategy)) {
+        if (!"create".equals(strategy)) {
             return false;
         }
         service.InstanciaBaseDeDadosTeste();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new SmtpEmailService();
     }
 }
